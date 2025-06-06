@@ -1,12 +1,13 @@
 # Certificados
 Entrega de Certificados
 Nombre del grupo: GEIMO
-Esandi Blaze
-Lopez Abigail
-Quiroga Diego
-Coronado Daniel
-Aliandri Adriel
-Camacho Tomás
+Integrantes:
+  Esandi Blaze
+  Lopez Abigail
+  Quiroga Diego
+  Coronado Daniel
+  Aliandri Adriel
+  Camacho Tomás
 
 ENTREGA DE CERTIFICADOS:
   La plataforma tiene la finalidad de agilizar el proceso de presentar certificados médicos directamente a la oficina de secretaría.
