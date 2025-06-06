@@ -3,10 +3,15 @@ Nombre del grupo: GEIMO
 
 Integrantes:
   Esandi Blaze
+
   Lopez Abigail
+
   Quiroga Diego
+
   Coronado Daniel
+
   Aliandri Adriel
+
   Camacho Tomás
 
 ENTREGA DE CERTIFICADOS:
