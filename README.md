@@ -2,6 +2,7 @@
 Nombre del grupo: GEIMO
 
 Integrantes:
+
   Esandi Blaze
 
   Lopez Abigail
