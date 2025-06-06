@@ -28,6 +28,7 @@ PANTALLAS:
      su certificado, en este caso será enviado a la página de registro.
   2. Registro: El usuario puede registrarse en la plataforma digitando sus datos como su número de DNI, nombre, apellido, e-mail y
      la contraseña que desea utilizar.
+
   3.Entrega de certificados: Se le presenta al usuario un formulario donde se le pide su nombre, apellido, cargo (Alumno, docente
      o preceptor) y se le da la opción de adjuntar una nota con cualquier información adicional que desee enviar junto con el
      certificado. También se pide que el usuario adjunte el archivo donde se encuentra su certificado médico.
