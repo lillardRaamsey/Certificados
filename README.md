@@ -1,6 +1,6 @@
 # Certificados
-Entrega de Certificados
 Nombre del grupo: GEIMO
+
 Integrantes:
   Esandi Blaze
   Lopez Abigail
@@ -13,7 +13,9 @@ ENTREGA DE CERTIFICADOS:
   La plataforma tiene la finalidad de agilizar el proceso de presentar certificados médicos directamente a la oficina de secretaría.
 la misma consiste en un formulario sencillo de comprender en el que se digitan los datos del alumno, preceptor o docente que desea
 enviar su certificado, y se adjunta el archivo del mismo. (Ya sea un documento o una foto)
+
   El diseño de la plataforma fue realizado en Canva, utilizando funciones de Canva Pro.
+
 PANTALLAS:
   1. Login: Aquí el usuario visualiza una breve explicación de para qué funciona la plataforma, y puede iniciar sesión en la misma
      con su DNI y contraseña. También puede elegir registrarse para crear una cuenta en la plataforma y así poder proceder a enviar
@@ -27,6 +29,7 @@ PANTALLAS:
      principal de la institución.
 
 ELECCIÓN DE ESTILO: 
+
   La paleta de colores elegida fue pensada para que resulte vistosa junto con la plataforma ya existente de la institución, la cual
 utiliza tonos azules, celestes, grises y blancos. Se tomó como inspiración tambien la plataforma de la obra social ISSN, que (a pesar
 de ser simple) utiliza íconos llamativos, fuentes simples y colores vistosos.
