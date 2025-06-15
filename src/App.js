@@ -1,16 +1,16 @@
 import CertificadoForm from './componentes/FormularioCertificados';
 import './App.css';
-
+import FormRegistro from './componentes/formRegistro';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
-    <div>
-   <h1>bienvenido</h1>
 
-   <CertificadoForm />
-
-   <CertificadoForm />
-
-   </div>
+    <Router>
+        <Routes>
+            <Route path="/envioCertificado" element={<CertificadoForm />}/>
+            <Route path="/registro" element={<FormRegistro titulo="Registro de usuario" />}/>
+        </Routes>
+    </Router>
   );
 }
 
