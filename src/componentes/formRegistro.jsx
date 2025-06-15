@@ -72,7 +72,7 @@ const FormRegistro = ({titulo}) =>{
                 <div className="form-grupo">
                     <label>Ingrese su DNI</label>
                     <input
-                        type="text"
+                        type="number"
                         value={DNI}
                         onChange={(e) => setDNI(e.target.value)}
                         placeholder="12345678"
@@ -99,6 +99,9 @@ const FormRegistro = ({titulo}) =>{
                         onChange={(e) => setTelefono(e.target.value)}
                         placeholder=""
                     />
+                </div>
+                <div>
+                    <h3>¿Ya Tienes una Cuenta? <a href="/ingresar">Inicia Sesión</a></h3>
                 </div>
             </div>
                 <button type="submit">Enviar</button>
