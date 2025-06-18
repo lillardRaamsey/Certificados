@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import "../css/formRegistro.css"
 const FormRegistro = ({titulo}) =>{ 
@@ -13,20 +13,24 @@ const FormRegistro = ({titulo}) =>{
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/inicio-sesion", {
+        if(contraseña !==contraseña2) {
+            alert("las contraseñas debe coincidir");
+            return;
+        }
+        navigate("/ingresar", {
             state: { nombre, apellido, contraseña, contraseña2, email, DNI}
         });
     };
 
     return (
         <div className="form-contenedor">
-            <h1>entrega de certificados</h1>
-            <h2>{titulo}</h2>
             <form onSubmit={handleSubmit} className="glass-form">
             <div>
-            <h3>datos</h3>
+            <h1>{titulo}</h1>
+            <h2>Datos:</h2>
+            <div className="grid-contenedor-datos">
                 <div className="form-grupo">
-                    <label>Ingrese su nombre</label>
+                    <label>Ingrese su nombre:</label>
                     <input
                         type="text"
                         value={nombre}
@@ -37,7 +41,7 @@ const FormRegistro = ({titulo}) =>{
                 </div>
                     
                 <div className="form-grupo">
-                    <label>Ingrese su apellido</label>
+                    <label>Ingrese su apellido:</label>
                     <input
                         type="text"
                         value={apellido}
@@ -48,7 +52,7 @@ const FormRegistro = ({titulo}) =>{
                 </div>
 
                 <div className="form-grupo">
-                    <label>Ingrese una contraseña</label>
+                    <label>Ingrese una contraseña:</label>
                     <input
                         type="password"
                         value={contraseña}
@@ -59,18 +63,18 @@ const FormRegistro = ({titulo}) =>{
                 </div>
 
                 <div className="form-grupo">
-                    <label>Confirme la contraseña</label>
+                    <label>Confirme la contraseña:</label>
                     <input
                         type="password"
                         value={contraseña2}
                         onChange={(e) => setContraseña2(e.target.value)}
-                        placeholder="Repita la Contraseña"
+                        placeholder="***************"
                         required
                     />
                 </div>
 
                 <div className="form-grupo">
-                    <label>Ingrese su DNI</label>
+                    <label>Ingrese su DNI:</label>
                     <input
                         type="number"
                         value={DNI}
@@ -81,7 +85,8 @@ const FormRegistro = ({titulo}) =>{
                 </div>
             </div>
             <div>
-                <h3>contacto</h3>
+                <h2>Contactos:</h2>
+            <div className="grid-contenedor-contacto">   
                 <div className="form-grupo">
                     <label>Email</label>
                     <input
@@ -97,14 +102,17 @@ const FormRegistro = ({titulo}) =>{
                         type="tel"
                         value={telefono}
                         onChange={(e) => setTelefono(e.target.value)}
-                        placeholder=""
+                        placeholder="ej: 2991234567"
                     />
                 </div>
+            </div> 
+                    <button type="submit">Enviar</button>
                 <div>
                     <h3>¿Ya Tienes una Cuenta? <a href="/ingresar">Inicia Sesión</a></h3>
                 </div>
             </div>
-                <button type="submit">Enviar</button>
+        
+            </div>
             </form>
         </div>
     );
