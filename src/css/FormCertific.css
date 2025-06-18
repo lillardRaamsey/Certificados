@@ -1,0 +1,111 @@
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6e6;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .form-container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #f2f2f2;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            background-color: #233a5e;
+            color: white;
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .form-layout {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .form-left {
+            width: 45%;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #233a5e;
+        }
+
+        .input [type="file"] {
+            width: 40%;
+            border: 2px solid #233a5e;
+            border-radius: 10px;
+            background-color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            flex-direction: column;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-upload:hover {
+            background-color: #f0f0f0;
+        }
+
+        .file-upload i {
+            font-size: 80px;
+            margin-bottom: 15px;
+            color: #233a5e;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .buttons button {
+            background-color: #233a5e;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .buttons button:hover {
+            background-color: #1a2c4d;
+        }

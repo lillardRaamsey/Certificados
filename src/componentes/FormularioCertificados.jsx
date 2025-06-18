@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../css/FormCertific.css"
 
 export default function CertificadoForm() {
   const [nombre, setNombre] = useState('');
