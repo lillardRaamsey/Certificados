@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../css/FormCertific.css"
+import"../css/FormCertific.css"
 
 export default function CertificadoForm() {
   const [nombre, setNombre] = useState('');
@@ -42,70 +42,78 @@ export default function CertificadoForm() {
   };
 
   return (
-    <div>
-      <h1>ENTREGA DE CERTIFICADOS</h1>
-      <p>Utilice el siguiente formulario para enviar su certificado médico.</p>
+    <div className="certificado-container">
+    <form className="certificado-form" onSubmit={handleSubmit}>
+  <div className="form-layout">
+    <div className="form-left">
+      <div className="form-group">
+        <label>Ingrese su/s nombre/s *</label>
+        <input
+          type="text"
+          placeholder="Ej: Pepe"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          required
+        />
+      </div>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Ingrese su/s nombre/s *</label><br />
-          <input
-            type="text"
-            placeholder="Ej: Pepe"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            required
-          />
-        </div>
+      <div className="form-group">
+        <label>Ingrese su/s apellido/s *</label>
+        <input
+          type="text"
+          placeholder="Ej: Gutierrez"
+          value={apellido}
+          onChange={(e) => setApellido(e.target.value)}
+        />
+      </div>
 
-        <div>
-          <label>Ingrese su/s apellido/s</label><br />
-          <input
-            type="text"
-            placeholder="Ej: Gutierrez"
-            value={apellido}
-            onChange={(e) => setApellido(e.target.value)}
-          />
-        </div>
+      <div className="form-group">
+        <label>Seleccione su cargo *</label>
+        <select
+          value={cargo}
+          onChange={(e) => setCargo(e.target.value)}
+          required
+        >
+          <option value="">Ninguno seleccionado</option>
+          <option value="Estudiante">Estudiante</option>
+          <option value="Profesor">Profesor</option>
+          <option value="Administrativo">Administrativo</option>
+        </select>
+      </div>
 
-        <div>
-          <label>Seleccione su cargo *</label><br />
-          <select
-            value={cargo}
-            onChange={(e) => setCargo(e.target.value)}
-            required
-          >
-            <option value="">Ninguno seleccionado</option>
-            <option value="Estudiante">Estudiante</option>
-            <option value="Profesor">Profesor</option>
-            <option value="Administrativo">Administrativo</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Agregue una nota</label><br />
-          <textarea
-            placeholder="La nota puede contener información adicional relacionada..."
-            value={nota}
-            onChange={(e) => setNota(e.target.value)}
-            rows="3"
-          ></textarea>
-        </div>
-
-        <div>
-          <label>Seleccione un archivo</label><br />
-          <input
-            type="file"
-            id="archivoInput"
-            onChange={(e) => setArchivo(e.target.files[0])}
-          />
-        </div>
-
-        <div>
-          <button type="button" onClick={handleReset}>ELIMINAR</button>
-          <button type="submit">ENVIAR</button>
-        </div>
-      </form>
+      <div className="form-group">
+        <label>(Opcional) agregue una nota</label>
+        <textarea
+          placeholder="La nota puede contener información adicional relacionada..."
+          value={nota}
+          onChange={(e) => setNota(e.target.value)}
+          rows="3"
+        ></textarea>
+      </div>
     </div>
+
+    <div className="form-right">
+      <label className="archivo-label">Seleccione un archivo…</label>
+      <div className="archivo-drop">
+        <input
+          type="file"
+          id="archivoInput"
+          onChange={(e) => setArchivo(e.target.files[0])}
+        />
+        <i className="icono-subida">📁⬆️</i>
+      </div>
+    </div>
+  </div>
+
+  <div className="button-container">
+    <button type="button" className="btn btn-reset" onClick={handleReset}>
+      ELIMINAR
+    </button>
+    <button type="submit" className="btn btn-submit">
+      ENVIAR
+    </button>
+  </div>
+</form>
+</div>
   );
 }
