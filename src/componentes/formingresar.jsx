@@ -15,11 +15,9 @@ const Formingresar = ({titulo}) =>{
 
     return (
         <div className="form-contenedor">
-            <h1>Entrega de Certificados</h1>
-            <h2>Iniciar Sesión</h2>
             <form onSubmit={handleSubmit} className="glass-form">
             <div>
-
+                <h1>Iniciar Sesión</h1>
                 <div className="form-grupo">
                     <label>Ingresar DNI: </label>
                     <input
