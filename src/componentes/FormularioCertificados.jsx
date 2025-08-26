@@ -8,14 +8,6 @@ export default function CertificadoForm() {
   const [nota, setNota] = useState('');
   const [archivo, setArchivo] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!nombre || !cargo) {
-      alert('Por favor, complete los campos obligatorios.');
-      return;
-    }
-
  // Creamos el objeto con los datos
     const datosFormulario = {
       nombre,
@@ -65,20 +57,6 @@ export default function CertificadoForm() {
           value={apellido}
           onChange={(e) => setApellido(e.target.value)}
         />
-      </div>
-
-      <div className="form-group">
-        <label>Seleccione su cargo *</label>
-        <select
-          value={cargo}
-          onChange={(e) => setCargo(e.target.value)}
-          required
-        >
-          <option value="">Ninguno seleccionado</option>
-          <option value="Estudiante">Estudiante</option>
-          <option value="Profesor">Profesor</option>
-          <option value="Administrativo">Administrativo</option>
-        </select>
       </div>
 
       <div className="form-group">
