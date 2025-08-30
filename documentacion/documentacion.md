@@ -21,3 +21,12 @@ En la arquitectura, se analizó la manera de distribución de manera que se vean
 La fuente que se empleó para el sistema se le denomina como “Codec-Cold-Light-trial.ttf” obtenida y descargada de la página “DaFont”.
 
 Funcionalidades del sistema: Por el momento se pueden llenar los campos de manera manual, el css está en proceso y probando al igual que el js.
+
+Reorganización de roles del grupo:
+-Diego, Camacho y Adriel: BackEnd.
+-Coronado, Blaze y Abigail: CSS.
+-Blaze: Diseño.
+-Camacho: Documentacion.
+
+
+
