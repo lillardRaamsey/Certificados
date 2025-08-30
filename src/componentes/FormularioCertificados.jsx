@@ -46,6 +46,7 @@ return (
   <div className="form-layout">
     <div className="form-left">
       <div className="form-group">
+        <h1>Envío de certificados</h1>
         <label>Ingrese su/s nombre/s *</label>
         <input
           type="text"

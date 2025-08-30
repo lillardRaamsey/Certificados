@@ -1,9 +1,11 @@
+
 .form-contenedor {
-    min-height: 100vh;
     display: flex;
     align-items: center;    
     justify-content: center;
-   background: linear-gradient(180deg, #1e2a38, #3c4a5a, #1e2a38);
+    background-image: url('../img/imagenfondo.png');
+    background-position: center; /* Centra la imagen */
+    min-height: 100vh; /* Asegúrate de que ocupe toda la altura de la ventana */; /*FONDOOOOOOO*/
     padding: 20px;
 }
 
