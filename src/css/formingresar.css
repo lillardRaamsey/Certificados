@@ -1,0 +1,8 @@
+.fondo-inicio{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+   background: linear-gradient(180deg, #1e2a38, #3c4a5a, #1e2a38);
+    padding: 20px;
+}

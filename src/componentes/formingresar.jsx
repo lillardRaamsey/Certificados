@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import "../css/formingresar.css"
+
 const Formingresar = ({titulo}) =>{ 
     const [DNI, setDNI] = useState('');
     const [contraseña, setContraseña] = useState('');

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import"../css/FormCertific.css"
+import"../css/FormCertific.css";
 
 export default function CertificadoForm() {
   const [nombre, setNombre] = useState('');
@@ -7,7 +7,14 @@ export default function CertificadoForm() {
   const [cargo, setCargo] = useState('');
   const [nota, setNota] = useState('');
   const [archivo, setArchivo] = useState(null);
-
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!nombre || !cargo){
+      alert('porfavor complete los campos');
+      return;
+    }
+  
  // Creamos el objeto con los datos
     const datosFormulario = {
       nombre,
@@ -22,7 +29,7 @@ export default function CertificadoForm() {
 
     alert('Formulario enviado correctamente.');
     handleReset();
-  };
+  }
 
   const handleReset = () => {
     setNombre('');
@@ -33,7 +40,7 @@ export default function CertificadoForm() {
     document.getElementById('archivoInput').value = null;
   };
 
-  return (
+return (
     <div className="certificado-container">
     <form className="certificado-form" onSubmit={handleSubmit}>
   <div className="form-layout">
@@ -93,5 +100,5 @@ export default function CertificadoForm() {
   </div>
 </form>
 </div>
-  );
-}
+);
+ };
