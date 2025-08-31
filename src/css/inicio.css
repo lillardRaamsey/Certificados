@@ -1,7 +1,54 @@
-*{
-  padding: 0%;
-  margin: 0%;
-  margin-bottom: 0%;
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 800px;  /* más ancho */
+  height: 450px;     /* más alto */
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  background: #000;  /* fondo negro detrás de las fotos */
 }
 
+.carousel-track {
+  display: flex;
+  transition: transform 1s ease;
+  height: 100%;
+}
 
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* cambia a 'cover' si querés que recorte para llenar */
+  flex-shrink: 0;
+}
+
+/* Flechas */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.arrow:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+.arrow.left {
+  left: 105px;   /* pegada al borde izquierdo */
+  width: 40px;
+}
+
+.arrow.right {
+  right: 105px;  /* pegada al borde derecho */
+    width: 10px;
+}

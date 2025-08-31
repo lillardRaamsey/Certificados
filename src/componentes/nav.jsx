@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <div className="navbar">
       <img src={logo} alt="Logo EPET N°20" />
-      <a href="/envioCertificado">Inicio</a>
+      <a href="/">Inicio</a>
 
       <div className="dropdown">
         <a href="/registro">registro</a>
