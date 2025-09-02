@@ -28,5 +28,11 @@ Reorganización de roles del grupo:
 -Blaze: Diseño.
 -Camacho: Documentacion.
 
+30/8/25
+
+-Implementamos FireBase.
+-Implementamos inicio.
+-Implementamos Log In simulado.
+
 
 
