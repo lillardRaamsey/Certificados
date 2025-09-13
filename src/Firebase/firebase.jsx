@@ -16,6 +16,21 @@ const firebaseConfig = {
   measurementId: "G-ZH89WEE13C"
 };
 
-// Initialize Firebase
+
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
+
+// Analytics (opcional)
 const analytics = getAnalytics(app);
+
+// Exportar Firestore
+export const db = getFirestore(app);
+
+// Exportar Auth
+export const auth = getAuth(app);
+
+// Persistencia: mantiene sesión activa
+setPersistence(auth, browserLocalPersistence);
+
+// Proveedor de Google
+export const googleProvider = new GoogleAuthProvider();
