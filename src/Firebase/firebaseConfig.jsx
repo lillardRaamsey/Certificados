@@ -1,11 +1,21 @@
-// Import the functions you need from the SDKs you need
+// src/Firebase/firebaseConfig.jsx
+
+// Importar SDK base
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firestore
+import { getFirestore } from "firebase/firestore";
+
+// Auth
+import { 
+  getAuth, 
+  setPersistence, 
+  browserLocalPersistence, 
+  GoogleAuthProvider 
+} from "firebase/auth";
+
+// Configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCVVnXzwKxu_kBoNlEKjluBQPMpJRYPHbQ",
   authDomain: "certific-ar.firebaseapp.com",
@@ -16,21 +26,22 @@ const firebaseConfig = {
   measurementId: "G-ZH89WEE13C"
 };
 
-
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 
 // Analytics (opcional)
 const analytics = getAnalytics(app);
 
-// Exportar Firestore
+// Firestore
 export const db = getFirestore(app);
 
-// Exportar Auth
+// Auth
 export const auth = getAuth(app);
 
-// Persistencia: mantiene sesión activa
+// Persistencia: mantiene sesión activa aunque se cierre la pestaña
 setPersistence(auth, browserLocalPersistence);
 
 // Proveedor de Google
 export const googleProvider = new GoogleAuthProvider();
+
+export default app;

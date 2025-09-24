@@ -6,14 +6,16 @@ export default function CertificadoForm() {
   const { addCertificado } = useCertificados(); // obtenemos la función para agregar
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [cargo, setCargo] = useState('');
   const [nota, setNota] = useState('');
   const [archivo, setArchivo] = useState(null);
 
+  // ✅ Manejar envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!nombre || !cargo) {
-      alert('Por favor complete los campos obligatorios');
+
+    // Validación simple: nombre y apellido obligatorios
+    if (!nombre || !apellido) {
+      alert("Por favor complete los campos obligatorios");
       return;
     }
 
@@ -21,9 +23,8 @@ export default function CertificadoForm() {
     const datosFormulario = {
       nombre,
       apellido,
-      cargo,
       nota,
-      archivoNombre: archivo ? archivo.name : null,
+      archivoNombre: archivo ? archivo.name : null, // si no sube archivo, va null
       creado: new Date()
     };
 
@@ -38,10 +39,10 @@ export default function CertificadoForm() {
     }
   };
 
+  // ✅ Resetear formulario
   const handleReset = () => {
     setNombre('');
     setApellido('');
-    setCargo('');
     setNota('');
     setArchivo(null);
     document.getElementById('archivoInput').value = null;
@@ -71,6 +72,7 @@ export default function CertificadoForm() {
                 placeholder="Ej: Gutierrez"
                 value={apellido}
                 onChange={(e) => setApellido(e.target.value)}
+                required
               />
             </div>
 
@@ -109,4 +111,4 @@ export default function CertificadoForm() {
       </form>
     </div>
   );
-};
+}
