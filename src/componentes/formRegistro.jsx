@@ -83,10 +83,6 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
                 required
               />
             </div>
-
-            
-            
-            
           
           </div>
           <br></br>
@@ -99,12 +95,8 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
                 placeholder="email@gmail.com"
                 />
               </div>
-
           
             <button type="submit">Enviar</button>
-
-            
-
             
             <div>
               <h3>
@@ -117,5 +109,4 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
     </div>
   );
 };
-
 export default FormRegistro;
