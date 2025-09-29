@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom"
 import "../css/formingresar.css"
 
 const Formingresar = ({titulo}) =>{ 
-    const [DNI, setDNI] = useState('');
+    const [email, setEmail] = useState('');
     const [contraseña, setContraseña] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate("/inicio-sesion", {
-            state: { contraseña, DNI}
+            state: { email, contraseña }
         });
     };
 
@@ -20,12 +20,12 @@ const Formingresar = ({titulo}) =>{
             <div>
                 <h1>Iniciar Sesión</h1>
                 <div className="form-grupo">
-                    <label>Ingresar DNI: </label>
+                    <label>Ingresar Email: </label>
                     <input
-                        type="number"
-                        value={DNI}
-                        onChange={(e) => setDNI(e.target.value)}
-                        placeholder="12345678"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="ejemplo@correo.com"
                         required
                     />
                 </div>

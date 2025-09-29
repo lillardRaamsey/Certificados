@@ -9,7 +9,6 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
   const [contraseña, setContraseña] = useState("");
   const [contraseña2, setContraseña2] = useState("");
   const [email, setEmail] = useState("");
-  const [DNI, setDNI] = useState("");
   const [telefono, setTelefono] = useState("");
   const navigate = useNavigate();
 
@@ -27,7 +26,6 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
       nombre,
       apellido,
       email,
-      DNI,
       telefono,
       rol, // 👈 se asigna por atrás (default alumno)
     });
@@ -86,20 +84,6 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
               />
             </div>
 
-            <div className="form-grupo">
-              <label>Ingrese su DNI:</label>
-              <input
-                type="number"
-                value={DNI}
-                onChange={(e) => setDNI(e.target.value)}
-                placeholder="12345678"
-                required
-              />
-            </div>
-          </div>
-
-          <div>
-            <h2>Contactos:</h2>
             <div className="grid-contenedor-contacto">
               <div className="form-grupo">
                 <label>Email</label>
@@ -110,16 +94,9 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
                   placeholder="email@gmail.com"
                 />
               </div>
-              <div className="form-grupo">
-                <label>Telefono</label>
-                <input
-                  type="tel"
-                  value={telefono}
-                  onChange={(e) => setTelefono(e.target.value)}
-                  placeholder="ej: 2991234567"
-                />
-              </div>
-            </div>
+          </div>
+
+          
             <button type="submit">Enviar</button>
             <div>
               <h3>
