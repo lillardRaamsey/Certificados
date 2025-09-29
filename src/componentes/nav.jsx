@@ -7,14 +7,12 @@ function Navbar() {
       <a href="/">Inicio</a>
 
       <div className="dropdown">
-        <a href="/registro">registro</a>
-        <div className="dropdown-content">
-      </div>
+        <a href="/ingresar">inicio de sesion</a>
+        <div className="dropdown-content"></div>
       </div>
       <div className="dropdown">
-        <a href="/ingresar">inicio de sesion</a>
-        <div className="dropdown-content">
-        </div>
+        <a href="/registro">registro</a>
+        <div className="dropdown-content"></div>
       </div>
     </div>
   );
