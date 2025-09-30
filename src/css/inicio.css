@@ -19,12 +19,12 @@
 .carousel {
   position: relative;
   width: 100%;
-  max-width: 800px;  /* más ancho */
+  max-width: 800px;
   height: 450px;
   overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  background: #000;  /* fondo negro detrás de las fotos */
+  background: #000;
 }
 
 .carousel-track {
@@ -42,30 +42,24 @@
 .arrow {
   position: absolute;
   top: 43%;
-  transform: translateY(-50%);
-  background: rgba(255, 237, 237, 0.5);
   border: none;
-  color: rgb(0, 0, 0);
   font-size: 2rem;
-  padding: 15px;
   cursor: pointer;
   z-index: 9;
   border-radius: 50%;
   transition: background 0.3s;
 }
 
-.arrow:hover {
-  background: rgba(255, 246, 246, 0.733);
-}
-
 .arrow.left {
   left: 10px; 
   width: 40px;
+  color: aliceblue;
 }
 
 .arrow.right {
   right: 10px;  /* pegada al borde derecho */
   width: 10px;
+  color: aliceblue;
 }
 
 
@@ -95,3 +89,5 @@ a:hover {
   color: #2c53ff;
   font-size: 19px;                 
 }
+
+
