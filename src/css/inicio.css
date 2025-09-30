@@ -1,30 +1,13 @@
-.inicio-container {
-  height: 100vh;
-  width: 100%;
-  background-image: url("../img/iniciofondo.jpeg");
-  background-size: cover;     
-  background-position: center; 
-  background-repeat: no-repeat; 
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-}
-
-.titulo {
-  font-style: oblique;
-  color: rgb(253, 246, 238);
-  margin-bottom: 0%;
-}
-
 .carousel {
   position: relative;
   width: 100%;
-  max-width: 800px;
-  height: 450px;
+  max-width: 800px;  /* más ancho */
+  height: 450px;     /* más alto */
+  margin: 20px auto;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  background: #000;
+  background: #000;  /* fondo negro detrás de las fotos */
 }
 
 .carousel-track {
@@ -39,55 +22,33 @@
   object-fit: contain; /* cambia a 'cover' si querés que recorte para llenar */
   flex-shrink: 0;
 }
+
+/* Flechas */
 .arrow {
   position: absolute;
-  top: 43%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
   border: none;
+  color: white;
   font-size: 2rem;
+  padding: 10px 15px;
   cursor: pointer;
-  z-index: 9;
+  z-index: 2;
   border-radius: 50%;
   transition: background 0.3s;
 }
 
+.arrow:hover {
+  background: rgba(0,0,0,0.8);
+}
+
 .arrow.left {
-  left: 10px; 
+  left: 105px;   /* pegada al borde izquierdo */
   width: 40px;
-  color: aliceblue;
 }
 
 .arrow.right {
-  right: 10px;  /* pegada al borde derecho */
-  width: 10px;
-  color: aliceblue;
+  right: 105px;  /* pegada al borde derecho */
+    width: 10px;
 }
-
-
-.button {
-  height: 40px;
-  width: 170px;
-  border: none;
-  background: #61a3ef;
-  border-radius: 1rem;
-  transition: 0.2s;
-  margin-top: 3%;
-  margin-left: 27%;
-}
-
-.button:hover {
-  transform: scale(1.2);
-}
-
-a {
-  color: white;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 18px;                  
-  text-decoration: none;
-}
-
-a:hover {
-  color: #2c53ff;
-  font-size: 19px;                 
-}
-
-

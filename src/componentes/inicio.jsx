@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../css/inicio.css";
+import FormularioCertificados from "./FormularioCertificados";
 
+// Importamos imágenes
 import foto1 from "../img/epet20.png";
 import foto2 from "../img/imagenfondo.png"; 
-import foto3 from "../img/epet20.png"; //imahenes de carrousel
+import foto3 from "../img/epet20.png"; // podés poner otra distinta
 
 export default function Inicio() {
-
   const [index, setIndex] = useState(0);
   const images = [foto1, foto2, foto3];
 
@@ -42,14 +43,10 @@ export default function Inicio() {
           </div>
           <button className="arrow right" onClick={nextSlide}>❯</button>
         </div>
-             <div className="button">
-              <a href="/ingresar">Ingresar</a>
-        </div>
-          <div classname="registrarte">
-                  <a href="/registro">¿No tenés una cuenta? Registrate</a>
-         </div>
+
+        {/* Formulario */}
+        <FormularioCertificados />
       </div>
     </div>
   );
-
 }

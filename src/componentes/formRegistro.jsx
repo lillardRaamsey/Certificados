@@ -95,7 +95,7 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
                 placeholder="email@gmail.com"
                 />
               </div>
-          
+
             <button type="submit">Enviar</button>
             
             <div>
