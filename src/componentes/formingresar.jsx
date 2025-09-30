@@ -30,6 +30,8 @@ const Formingresar = ({titulo}) =>{
                     />
                 </div>
 
+                <br></br>
+
                 <div className="form-grupo">
                     <label>Ingresar Contraseña: </label>
                     <input
@@ -40,12 +42,14 @@ const Formingresar = ({titulo}) =>{
                         required
                     />
                 </div>
-                <div>
-                    <h3>¿No Tienes una Cuenta? <a href="/registro">Registrate</a></h3>
-                </div>
+                
 
             </div>
                 <button type="submit">Iniciar Sesión</button>
+
+                <div>
+                    <h3>¿No Tienes una Cuenta? <a href="/registro">Registrate</a></h3>
+                </div>
             </form>
         </div>
     );

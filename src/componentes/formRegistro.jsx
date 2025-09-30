@@ -83,31 +83,30 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
                 required
               />
             </div>
-
-            <div className="grid-contenedor-contacto">
-              <div className="form-grupo">
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="email@gmail.com"
+          
+          </div>
+          <br></br>
+          <div className="form-grupo">
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="email@gmail.com"
                 />
               </div>
-          </div>
-
           
             <button type="submit">Enviar</button>
+            
             <div>
               <h3>
                 ¿Ya Tienes una Cuenta? <a href="/ingresar">Inicia Sesión</a>
               </h3>
             </div>
-          </div>
+          
         </div>
       </form>
     </div>
   );
 };
-
 export default FormRegistro;
