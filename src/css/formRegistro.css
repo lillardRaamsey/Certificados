@@ -1,18 +1,23 @@
+/* src/css/formRegistro.css */
 
+/* Contenedor principal */
 .form-contenedor {
     display: flex;
     align-items: center;    
     justify-content: center;
     background-image: url('../img/imagenfondo.png');
-    background-position: center; /* Centra la imagen */
-    min-height: 100vh; /* Asegúrate de que ocupe toda la altura de la ventana */; /*FONDOOOOOOO*/
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
     padding: 20px;
 }
 
+/* Formulario con efecto glass */
 .glass-form {
     background: #D6D7D3;
     border-radius: 40px;
-    padding: 20px;
+    padding: 30px;
     width: 100%;
     max-width: 700px;
     box-shadow: 10px 10px 50px 10px rgba(31, 38, 135, 0.70);
@@ -20,20 +25,52 @@
     color: #172843;
 }
 
-h1 {
+/* Títulos */
+.glass-form h1 {
     text-align: center;
-    margin-bottom:10px;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #172843;
 }
 
-h2 {
+.glass-form h2 {
     margin-top: 10px;
+    margin-bottom: 20px;
     text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #172843;
 }
 
-h3 {
+.glass-form h3 {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: #172843;
+}
+
+.glass-form h3 a {
+    color: #1C3051;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.glass-form h3 a:hover {
+    color: #243D5E;
+    text-decoration: underline;
+}
+
+/* Mensaje de error */
+.error-mensaje {
+    color: #d32f2f;
+    padding: 12px 15px;
+    border: 3px solid #d32f2f;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    background-color: #ffebee;
 }
 
 button {
@@ -45,50 +82,122 @@ button {
     background: #1C3051;
     color: white;
     font-weight: bold;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: shake 0.3s ease-in-out;
 }
 
-button:hover {
-    background: #8F8F8F;
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
 }
 
+/* Grid de datos */
 .grid-contenedor-datos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:10px 70px;
-
+    gap: 10px 70px;
+    margin-bottom: 20px;
 }
 
+/* Grupo de formulario */
 .form-grupo {
     display: flex;
     flex-direction: column;
-
 }
 
 .form-grupo label {
     margin-bottom: 10px;
     font-size: 16.5px;
     text-align: center;
+    color: #172843;
+    font-weight: 600;
 }
 
 .form-grupo input {
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 15px;
     border: 3px solid #172843;
     background: #F2F2F2;
-    color:darkblue;
+    color: #172843;
     font-size: 15px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .form-grupo input:focus {
     background: azure;
+    outline: none;
+    border-color: #1C3051;
+    box-shadow: 0 0 0 3px rgba(28, 48, 81, 0.1);
 }
 
+.form-grupo input:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-color: #8F8F8F;
+}
+
+.form-grupo input::placeholder {
+    color: #8F8F8F;
+    opacity: 0.7;
+}
+
+.form-grupo small {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Botón de envío */
+.glass-form button[type="submit"] {
+    width: 100%;
+    margin-top: 30px;
+    padding: 12px;
+    border-radius: 18px;
+    border: none;
+    background: #1C3051;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(28, 48, 81, 0.3);
+}
+
+.glass-form button[type="submit"]:hover:not(:disabled) {
+    background: #243D5E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(28, 48, 81, 0.5);
+}
+
+.glass-form button[type="submit"]:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(28, 48, 81, 0.3);
+}
+
+.glass-form button[type="submit"]:disabled {
+    background: #8F8F8F;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+/* Grid de contacto */
 .grid-contenedor-contacto {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:70px;
+    gap: 70px;
+}
+
+/* Animación de carga en el botón */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
