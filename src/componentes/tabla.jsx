@@ -17,13 +17,11 @@ export default function CertificadoForm() {
           </tr>
         </thead>
         <tbody>
-          {usuarios.map((u) => (
-            <tr key={u.id}>
-              <td>{u.nombre}</td>
-              <td>{u.edad}</td>
-              <td>{u.email}</td>
+            <tr>
+              <td> Nombre </td>
+              <td> Edad</td>
+              <td> Email</td>
             </tr>
-          ))}
         </tbody>
       </table>
     </div>
