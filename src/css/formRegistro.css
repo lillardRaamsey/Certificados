@@ -71,16 +71,6 @@
     border-radius: 15px;
     margin-bottom: 20px;
     background-color: #ffebee;
-}
-
-button {
-    width: 80%;
-    margin-top: 30px;
-    padding: 10px;
-    border-radius: 18px;
-    border: none;
-    background: #1C3051;
-    color: white;
     font-weight: bold;
     text-align: center;
     display: flex;
