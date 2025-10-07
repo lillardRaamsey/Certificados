@@ -96,7 +96,7 @@ const FormRegistro = ({ titulo, rol = "alumno" }) => {
                 />
               </div>
 
-            <button type="submit">Enviar</button>
+            <button type="submit" class="enviar">Enviar</button>
             
             <div>
               <h3>
