@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../css/inicio.css";
-import FormularioCertificados from "./FormularioCertificados";
 
-// Importamos imágenes
 import foto1 from "../img/epet20.png";
 import foto2 from "../img/imagenfondo.png"; 
-import foto3 from "../img/epet20.png"; // podés poner otra distinta
+import foto3 from "../img/epet20.png"; //imágenes de carrousel
+import FormularioCertificados from './FormularioCertificados'; //esto fué por poner el formulario de certificados en el inicio
 
 export default function Inicio() {
+
   const [index, setIndex] = useState(0);
   const images = [foto1, foto2, foto3];
 
@@ -35,7 +35,7 @@ export default function Inicio() {
 
         {/* Carrusel */}
         <div className="carousel">
-          <button className="arrow left" onClick={prevSlide}>❮</button>
+          <div className="arrow left" onClick={prevSlide}>❮</div>
           <div className="carousel-track" style={{ transform: `translateX(-${index * 100}%)` }}>
             {images.map((img, i) => (
               <img key={i} src={img} alt={`Foto ${i+1}`} />
@@ -43,10 +43,12 @@ export default function Inicio() {
           </div>
           <button className="arrow right" onClick={nextSlide}>❯</button>
         </div>
-
-        {/* Formulario */}
-        <FormularioCertificados />
+        <a href="/ingresar"> <div className="button">Ingresar</div></a>
+          <div classname="registrarte">
+                  <a href="/registro">¿No tenés una cuenta? Registrate</a>
+         </div>
       </div>
     </div>
   );
+
 }
