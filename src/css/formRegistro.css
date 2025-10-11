@@ -47,43 +47,25 @@
     text-align: center;
     margin-top: 20px;
     margin-bottom: 10px;
-    font-size: 0.95rem;
-    color: #172843;
 }
 
-.glass-form h3 a {
-    color: #1C3051;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.glass-form h3 a:hover {
-    color: #243D5E;
-    text-decoration: underline;
-}
-
-/* Mensaje de error */
-.error-mensaje {
-    color: #d32f2f;
-    padding: 12px 15px;
-    border: 3px solid #d32f2f;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    background-color: #ffebee;
+.enviar {
+    width: 80%;
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 18px;
+    border: none;
+    background: #1C3051;
+    color: white;
     font-weight: bold;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    animation: shake 0.3s ease-in-out;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+
+button:hover {
+    background: #8F8F8F;
 }
 
 /* Grid de datos */

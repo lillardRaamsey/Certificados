@@ -141,7 +141,7 @@ const FormRegistro = ({ titulo, rol = "estudiante" }) => {
             />
           </div>
           
-          <button type="submit" disabled={loading} style={{
+          <button type="submit" class="enviar" disabled={loading} style={{
             opacity: loading ? 0.6 : 1,
             cursor: loading ? 'not-allowed' : 'pointer'
           }}>
