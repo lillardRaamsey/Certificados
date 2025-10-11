@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../css/inicio.css";
-
+import { useAuth } from "../context/AuthContex";
+import { Link } from "react-router-dom";
 import foto1 from "../img/epet20.png";
 import foto2 from "../img/imagenfondo.png"; 
 import foto3 from "../img/epet20.png"; //imágenes de carrousel
 import FormularioCertificados from './FormularioCertificados'; //esto fué por poner el formulario de certificados en el inicio
 
 export default function Inicio() {
-
   const [index, setIndex] = useState(0);
   const images = [foto1, foto2, foto3];
 
@@ -28,6 +28,8 @@ export default function Inicio() {
     setIndex((prev) => (prev + 1) % images.length);
   };
 
+  const {user}= useAuth();
+
   return (
     <div className="inicio-container">
       <div className="overlay">
@@ -43,10 +45,13 @@ export default function Inicio() {
           </div>
           <button className="arrow right" onClick={nextSlide}>❯</button>
         </div>
-        <a href="/ingresar"> <div className="button">Ingresar</div></a>
-          <div classname="registrarte">
-                  <a href="/registro">¿No tenés una cuenta? Registrate</a>
-         </div>
+        {user ? (
+        <><Link to="/envioCertificado"><div className="button">Certificados</div></Link></>
+         ) : (
+        <><Link to="/ingresar"> <div className="button">Ingresar</div></Link>
+          <div classname="registrarte"><Link to="/registro">¿No tenés una cuenta? Registrate</Link></div></>
+         )
+        }
       </div>
     </div>
   );

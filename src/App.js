@@ -5,6 +5,7 @@ import FormRegistro from './componentes/formRegistro';
 import Formingresar from './componentes/formingresar';
 import Inicio from './componentes/inicio';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContex';
 
 function Layout() {
   const location = useLocation();
@@ -13,13 +14,15 @@ function Layout() {
 
   return (
     <div>
-      {mostrarNavbar && <Navbar />}
-      <Routes>
-        <Route path='/' element={<Inicio />} />
-        <Route path="/envioCertificado" element={<CertificadoForm />} />
-        <Route path="/registro" element={<FormRegistro titulo="Registro de usuario" />} />
-        <Route path="/ingresar" element={<Formingresar />} />
-      </Routes>
+      <AuthProvider>
+        {mostrarNavbar && <Navbar />}
+        <Routes>
+          <Route path='/' element={<Inicio />} />
+          <Route path="/envioCertificado" element={<CertificadoForm />} />
+          <Route path="/registro" element={<FormRegistro titulo="Registro de usuario" />} />
+          <Route path="/ingresar" element={<Formingresar />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }

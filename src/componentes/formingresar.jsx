@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import "../css/formingresar.css"
+import appFirebase from "../Firebase/firebaseConfig"
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
+const auth = getAuth(appFirebase)
 
 const Formingresar = ({titulo}) =>{ 
     const [email, setEmail] = useState('');
     const [contraseña, setContraseña] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate("/inicio-sesion", {
-            state: { email, contraseña }
-        });
-    };
+        try{
+            await signInWithEmailAndPassword (auth, email, contraseña)
+            navigate("/");
+            }catch (error){
+                alert ("el correo o la contraseña son incorrectos")
+            }
+        }
 
     return (
         <div className="form-contenedor">

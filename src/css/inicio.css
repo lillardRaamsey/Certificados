@@ -66,11 +66,11 @@
 }
 
 .button {
-  width: 120px;
+    width: auto;
     margin-top: 30px;
     padding: 10px;
     border-radius: 18px;
-    border: none;
+    border: 2px solid aliceblue;
     background: #1C3051;
     color: white;
     font-weight: bold;
@@ -82,7 +82,7 @@
 
 .button:hover {
   transform: scale(1.2);
-  background: #8F8F8F;
+  background: rgb(60, 146, 204);
 }
 
 a {
