@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/formRegistro.css";
-import { useAuth } from "../hooks/useAuth"; // 👈 CAMBIO IMPORTANTE
+import { useAuth } from "../hooks/useAuth";
 
 const FormRegistro = ({ titulo, rol = "estudiante" }) => {
   const [nombre, setNombre] = useState("");
@@ -13,7 +13,7 @@ const FormRegistro = ({ titulo, rol = "estudiante" }) => {
   const [errorLocal, setErrorLocal] = useState(null);
   const navigate = useNavigate();
 
-  const { registrarUsuario, loading, error } = useAuth(); // 👈 CAMBIO
+  const { registrarUsuario, loading, error } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +45,6 @@ const FormRegistro = ({ titulo, rol = "estudiante" }) => {
       navigate("/ingresar");
     } catch (err) {
       console.error("Error en handleSubmit:", err);
-      // El error ya se muestra automáticamente
     }
   };
 
@@ -141,10 +140,15 @@ const FormRegistro = ({ titulo, rol = "estudiante" }) => {
             />
           </div>
           
-          <button type="submit" class="enviar" disabled={loading} style={{
-            opacity: loading ? 0.6 : 1,
-            cursor: loading ? 'not-allowed' : 'pointer'
-          }}>
+          <button 
+            type="submit" 
+            className="enviar" 
+            disabled={loading} 
+            style={{
+              opacity: loading ? 0.6 : 1,
+              cursor: loading ? 'not-allowed' : 'pointer'
+            }}
+          >
             {loading ? "⏳ Registrando..." : "Enviar"}
           </button>
           
