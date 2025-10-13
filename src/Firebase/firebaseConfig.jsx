@@ -7,6 +7,9 @@ import { getAnalytics } from "firebase/analytics";
 // Firestore
 import { getFirestore } from "firebase/firestore";
 
+// Storage
+import { getStorage } from "firebase/storage";
+
 // Auth
 import { 
   getAuth, 
@@ -35,6 +38,9 @@ const analytics = getAnalytics(app);
 // Firestore
 export const db = getFirestore(app);
 
+// Storage
+export const storage = getStorage(app);
+
 // Auth
 export const auth = getAuth(app);
 
@@ -43,5 +49,8 @@ setPersistence(auth, browserLocalPersistence);
 
 // Proveedor de Google
 export const googleProvider = new GoogleAuthProvider();
+
+// Exportar app también como named export
+export { app };
 
 export default app;
