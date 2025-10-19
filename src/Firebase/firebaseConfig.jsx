@@ -29,11 +29,15 @@ const firebaseConfig = {
   measurementId: "G-ZH89WEE13C"
 };
 
+
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 
 // Analytics (opcional)
 const analytics = getAnalytics(app);
+
+// Auth
+export const auth = getAuth(app);
 
 // Firestore
 export const db = getFirestore(app);
@@ -41,16 +45,14 @@ export const db = getFirestore(app);
 // Storage
 export const storage = getStorage(app);
 
-// Auth
-export const auth = getAuth(app);
-
-// Persistencia: mantiene sesión activa aunque se cierre la pestaña
-setPersistence(auth, browserLocalPersistence);
-
 // Proveedor de Google
 export const googleProvider = new GoogleAuthProvider();
 
-// Exportar app también como named export
-export { app };
+// Persistencia: configurar de forma asíncrona
+setPersistence(auth, browserLocalPersistence).catch((error) => {
+  console.error("Error al configurar persistencia:", error);
+});
 
+// Exportar app
+export { app };
 export default app;
