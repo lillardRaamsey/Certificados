@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/formRegistro.css";
 import { useAuth } from "../hooks/useAuth";
-
+import { Link } from "react-router-dom";
 const FormRegistro = ({ titulo, rol = "estudiante" }) => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
@@ -154,7 +154,7 @@ const FormRegistro = ({ titulo, rol = "estudiante" }) => {
           
           <div>
             <h3>
-              ¿Ya Tienes una Cuenta? <a href="/ingresar">Inicia Sesión</a>
+              ¿Ya Tienes una Cuenta? <Link to="/ingresar">Inicia Sesión</Link>
             </h3>
           </div>
         </div>

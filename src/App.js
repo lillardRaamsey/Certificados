@@ -1,26 +1,47 @@
 import Navbar from './componentes/nav';
-import CertificadoForm from './componentes/FormularioCertificados';
+
 import './App.css';
 import FormRegistro from './componentes/formRegistro';
 import Formingresar from './componentes/formingresar';
 import Inicio from './componentes/inicio';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContex';
+import ProtectedRoutes from './componentes/protectedRoute';
+import PublicRoute from './componentes/publicRoute';
+
+import RouterApp from './componentes/routerApp';
 
 function Layout() {
   const location = useLocation();
 
   const mostrarNavbar = location.pathname !== "/";
-
   return (
     <div>
       <AuthProvider>
         {mostrarNavbar && <Navbar />}
         <Routes>
           <Route path='/' element={<Inicio />} />
-          <Route path="/envioCertificado" element={<CertificadoForm />} />
-          <Route path="/registro" element={<FormRegistro titulo="Registro de usuario" />} />
-          <Route path="/ingresar" element={<Formingresar />} />
+          
+          <Route path="/registro" element={  
+            <PublicRoute>
+              <FormRegistro titulo="Registro de usuario" />
+            </PublicRoute>
+            } />
+          
+          <Route path="/ingresar" element={
+            <PublicRoute>
+              <Formingresar />
+            </PublicRoute>
+            } />
+
+          <Route 
+            path='/*'
+            element={
+              <ProtectedRoutes>
+                <RouterApp/>
+              </ProtectedRoutes>
+            }
+            />
         </Routes>
       </AuthProvider>
     </div>

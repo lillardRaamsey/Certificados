@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import "../css/formingresar.css"
 import appFirebase from "../Firebase/firebaseConfig"
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
+import { Link } from "react-router-dom";
 const auth = getAuth(appFirebase)
 
 const Formingresar = ({titulo}) =>{ 
@@ -54,7 +55,7 @@ const Formingresar = ({titulo}) =>{
                 <button type="submit">Iniciar Sesión</button>
 
                 <div>
-                    <h3>¿No Tienes una Cuenta? <a href="/registro">Registrate</a></h3>
+                    <h3>¿No Tienes una Cuenta? <Link to="/registro">Registrate</Link></h3>
                 </div>
             </form>
         </div>
