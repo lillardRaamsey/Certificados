@@ -1,22 +1,9 @@
 // src/Firebase/firebaseConfig.jsx
-
-// Importar SDK base
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-
-// Firestore
+import { getAuth, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
-// Storage
 import { getStorage } from "firebase/storage";
-
-// Auth
-import { 
-  getAuth, 
-  setPersistence, 
-  browserLocalPersistence, 
-  GoogleAuthProvider 
-} from "firebase/auth";
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -28,7 +15,6 @@ const firebaseConfig = {
   appId: "1:224819505288:web:1f60570e53678c9872173d",
   measurementId: "G-ZH89WEE13C"
 };
-
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
@@ -47,6 +33,11 @@ export const storage = getStorage(app);
 
 // Proveedor de Google
 export const googleProvider = new GoogleAuthProvider();
+
+// Configuración del provider de Google (AÑADE ESTAS 3 LÍNEAS)
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
 
 // Persistencia: configurar de forma asíncrona
 setPersistence(auth, browserLocalPersistence).catch((error) => {

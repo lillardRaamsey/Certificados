@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../css/formRegistro.css";
 import { useAuth } from "../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { FaGoogle } from 'react-icons/fa';
+
 const FormRegistro = ({ titulo, rol = "estudiante" }) => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
@@ -47,7 +49,22 @@ const FormRegistro = ({ titulo, rol = "estudiante" }) => {
       console.error("Error en handleSubmit:", err);
     }
   };
+const handleGoogleSignIn = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
 
+    console.log("Usuario autenticado con Google:", user);
+    alert("Bienvenido, " + user.displayName);
+
+    // Podés redirigir al usuario:
+    navigate("/ingresar");
+
+  } catch (err) {
+    console.error("Error al iniciar sesión con Google:", err);
+    setErrorLocal("Error al iniciar sesión con Google");
+  }
+};
   const errorMostrado = errorLocal || error;
 
   return (
@@ -151,7 +168,17 @@ const FormRegistro = ({ titulo, rol = "estudiante" }) => {
           >
             {loading ? "⏳ Registrando..." : "Enviar"}
           </button>
-          
+
+
+          <button 
+  type="button"
+  className="google-btn"
+  onClick={handleGoogleSignIn}
+  disabled={loading}
+>
+  <FaGoogle className="google-logo-color" />
+  Iniciar sesión con Google
+</button>
           <div>
             <h3>
               ¿Ya Tienes una Cuenta? <Link to="/ingresar">Inicia Sesión</Link>
