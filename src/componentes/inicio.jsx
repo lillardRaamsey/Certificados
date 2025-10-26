@@ -2,22 +2,14 @@ import React, { useState, useEffect } from "react";
 import "../css/inicio.css";
 import { useAuth } from "../context/AuthContex";
 import { Link } from "react-router-dom";
-import foto1 from "../img/epet20.png";
-import foto2 from "../img/imagenfondo.png"; 
-import foto3 from "../img/epet20.png"; //imágenes de carrousel
+import foto1 from "../img/certificar2.png";
+import foto2 from "../img/Certificartexto.jpg"; //imágenes de carrousel
+import foto3 from "../img/epet20.png";
 import FormularioCertificados from './FormularioCertificados'; //esto fué por poner el formulario de certificados en el inicio
 
 export default function Inicio() {
   const [index, setIndex] = useState(0);
   const images = [foto1, foto2, foto3];
-
-  // Auto-slide (cambia cada 6 segundos)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 6000); // 6 segundos
-    return () => clearInterval(interval);
-  }, [images.length]);
 
   // Funciones para flechas
   const prevSlide = () => {
@@ -43,7 +35,7 @@ export default function Inicio() {
               <img key={i} src={img} alt={`Foto ${i+1}`} />
             ))}
           </div>
-          <button className="arrow right" onClick={nextSlide}>❯</button>
+          <div className="arrow right" onClick={nextSlide}>❯</div>
         </div>
         {user ? (
         <><Link to="/envioCertificado"><div className="button">Certificados</div></Link></>
