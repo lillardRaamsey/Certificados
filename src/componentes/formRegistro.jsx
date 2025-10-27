@@ -4,6 +4,9 @@ import "../css/formRegistro.css";
 import { useAuth } from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { FaGoogle } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../Firebase/firebaseConfig";
 
 const FormRegistro = ({ titulo, rol = "estudiante" }) => {
   const [nombre, setNombre] = useState("");
