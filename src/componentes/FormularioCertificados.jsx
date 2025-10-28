@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { onAuthStateChanged } from 'firebase/auth';
-import { storage, auth } from '../Firebase/firebaseConfig';
+import { auth } from '../Firebase/firebaseConfig';
+import { authenticateSupabase, supabaseFileService } from '../Firebase/supabase';
 import "../css/FormCertific.css";
 import { useCertificados } from "../hooks/useCertificados";
 
@@ -16,36 +16,45 @@ export default function CertificadoForm() {
   const [archivo, setArchivo] = useState(null);
   
   // Estados para el proceso de subida
-  const [uploading, setUploading] = useState(false); // Indica si se está subiendo un archivo
-  const [uploadProgress, setUploadProgress] = useState(0); // Porcentaje de progreso (0-100)
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   
   // Estados para la autenticación
-  const [usuario, setUsuario] = useState(null); // Usuario autenticado actual
-  const [cargando, setCargando] = useState(true); // Indica si Firebase Auth está inicializando
+  const [usuario, setUsuario] = useState(null);
+  const [cargando, setCargando] = useState(true);
+  const [supabaseAuth, setSupabaseAuth] = useState(false);
 
-  // useEffect: Se ejecuta cuando el componente se monta
-  // Escucha cambios en el estado de autenticación del usuario
   useEffect(() => {
-    // onAuthStateChanged: Firebase notifica cada vez que cambia el estado de auth
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUsuario(user); // Guarda el usuario (null si no está autenticado)
-      setCargando(false); // Firebase ya terminó de cargar
-      console.log('Usuario autenticado:', user?.uid);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUsuario(user);
+      setCargando(false);
+      console.log('Usuario Firebase autenticado:', user?.uid);
       console.log('Email:', user?.email);
+
+      // Si hay usuario de Firebase, autenticar en Supabase automáticamente
+      if (user) {
+        try {
+          console.log('🔐 Iniciando autenticación en Supabase...');
+          await authenticateSupabase();
+          setSupabaseAuth(true);
+          console.log('✅ Autenticado en Supabase correctamente');
+        } catch (error) {
+          console.error('❌ Error al autenticar en Supabase:', error);
+          setSupabaseAuth(false);
+        }
+      }
     });
 
-    // Cleanup: Se ejecuta cuando el componente se desmonta
-    // Cancela la suscripción para evitar memory leaks
     return () => unsubscribe();
-  }, []); // Array vacío [] = solo se ejecuta una vez al montar
+  }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Previene que el formulario recargue la página
+    e.preventDefault();
 
-    // VALIDACIÓN 1: Verificar que el usuario esté autenticado
+    // VALIDACIÓN 1: Verificar que el usuario esté autenticado en Firebase
     if (!usuario) {
       alert('Debes iniciar sesión primero');
-      return; // Detiene la ejecución
+      return;
     }
 
     // VALIDACIÓN 2: Campos obligatorios
@@ -60,23 +69,23 @@ export default function CertificadoForm() {
         nombre,
         apellido,
         nota,
-        archivoNombre: null, // Sin archivo
-        archivoURL: null,    // Sin URL
-        userId: usuario.uid,       // ID del usuario autenticado
-        userEmail: usuario.email,  // Email del usuario
-        creado: new Date()         // Timestamp de creación
+        archivoNombre: null,
+        archivoURL: null,
+        archivoPath: null,
+        userId: usuario.uid,
+        userEmail: usuario.email,
+        creado: new Date()
       };
 
       try {
-        // Guarda en Firestore usando el hook personalizado
         await addCertificado(datosFormulario);
         alert('Formulario enviado correctamente 🚀');
-        handleReset(); // Limpia el formulario
+        handleReset();
       } catch (error) {
         console.error("Error al enviar:", error);
         alert("Hubo un error al enviar el formulario: " + error.message);
       }
-      return; // Sale de la función
+      return;
     }
 
     // VALIDACIÓN 3: Verificar que el archivo sea válido
@@ -85,128 +94,139 @@ export default function CertificadoForm() {
       return;
     }
 
-    // CASO 2: SI hay archivo, subirlo a Storage
-    setUploading(true); // Bloquea el formulario mientras sube
+    // VALIDACIÓN 4: Verificar tipos permitidos
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+    if (!allowedTypes.includes(archivo.type)) {
+      alert('Solo se permiten archivos PDF, JPG y PNG');
+      return;
+    }
+
+    // VALIDACIÓN 5: Verificar tamaño (50MB máximo)
+    const maxSize = 50 * 1024 * 1024; // 50MB
+    if (archivo.size > maxSize) {
+      alert('El archivo no puede superar 50MB');
+      return;
+    }
+
+    // CASO 2: SI hay archivo, subirlo a Supabase Storage
+    setUploading(true);
+    setUploadProgress(10); // Inicio
     
     try {
-      // Genera un nombre único para el archivo usando timestamp
-      const timestamp = Date.now(); // Ej: 1760844326386
-      // Limpia caracteres especiales del nombre original
-      const nombreArchivo = archivo.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-      // Crea la referencia en Storage: certificados/timestamp_nombrearchivo.pdf
-      const storageRef = ref(storage, `certificados/${timestamp}_${nombreArchivo}`);
+      console.log('📤 Iniciando proceso de subida...');
       
-      console.log('Iniciando subida a:', storageRef.fullPath);
+      // PASO 1: Asegurar autenticación en Supabase
+      if (!supabaseAuth) {
+        console.log('🔐 Re-autenticando en Supabase...');
+        await authenticateSupabase();
+        setSupabaseAuth(true);
+      }
+      setUploadProgress(20);
+
+      // PASO 2: Subir archivo usando el servicio
+      console.log('📤 Subiendo archivo a Supabase...');
+      const resultado = await supabaseFileService.uploadFile(archivo, {
+        folder: usuario.uid, // Organizar por usuario
+        bucketName: 'certific-ar'
+      });
+
+      if (!resultado.success) {
+        throw new Error(resultado.error || 'Error al subir archivo');
+      }
+
+      console.log('✅ Archivo subido exitosamente:', resultado.url);
+      setUploadProgress(70);
+
+      // PASO 3: Preparar datos para Firestore
+      const datosFormulario = {
+        nombre,
+        apellido,
+        nota,
+        archivoNombre: archivo.name,
+        archivoURL: resultado.url,
+        archivoPath: resultado.path, // Guardar path para poder eliminar después
+        archivoTipo: archivo.type,
+        archivoTamanio: archivo.size,
+        userId: usuario.uid,
+        userEmail: usuario.email,
+        creado: new Date()
+      };
+
+      console.log('💾 Guardando metadata en Firestore...');
+      setUploadProgress(85);
+
+      // PASO 4: Guardar en Firestore
+      await addCertificado(datosFormulario);
       
-      // uploadBytesResumable: Permite monitorear el progreso de subida
-      const uploadTask = uploadBytesResumable(storageRef, archivo);
-
-      // Monitorea el progreso de la subida
-      uploadTask.on('state_changed',
-        // 1. PROGRESO: Se ejecuta cada vez que sube una parte del archivo
-        (snapshot) => {
-          // Calcula el porcentaje (bytes subidos / bytes totales * 100)
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(Math.round(progress)); // Actualiza la barra de progreso
-          console.log('Progreso:', Math.round(progress) + '%');
-        },
-        
-        // 2. ERROR: Se ejecuta si hay un problema durante la subida
-        (error) => {
-          console.error("Error al subir archivo:", error);
-          console.error("Código de error:", error.code); // Ej: storage/unauthorized
-          console.error("Mensaje:", error.message);
-          alert("Error al subir el archivo: " + error.message);
-          setUploading(false); // Desbloquea el formulario
-          setUploadProgress(0); // Resetea el progreso
-        },
-        
-        // 3. COMPLETADO: Se ejecuta cuando el archivo se subió exitosamente
-        async () => {
-          try {
-            // Obtiene la URL pública del archivo subido
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            console.log('Archivo subido. URL:', downloadURL);
-            
-            // Prepara los datos completos para guardar en Firestore
-            const datosFormulario = {
-              nombre,
-              apellido,
-              nota,
-              archivoNombre: archivo.name,    // Nombre original
-              archivoURL: downloadURL,        // URL de Firebase Storage
-              archivoTipo: archivo.type,      // Ej: application/pdf
-              archivoTamanio: archivo.size,   // Tamaño en bytes
-              userId: usuario.uid,            // ID del usuario
-              userEmail: usuario.email,       // Email del usuario
-              creado: new Date()              // Timestamp
-            };
-
-            // Guarda todo en Firestore
-            await addCertificado(datosFormulario);
-            alert('Certificado enviado correctamente 🚀');
-            handleReset(); // Limpia el formulario
-            setUploadProgress(0); // Resetea progreso
-          } catch (error) {
-            console.error("Error al guardar en Firestore:", error);
-            alert("El archivo se subió pero hubo un error al guardar los datos: " + error.message);
-          } finally {
-            // finally: Se ejecuta siempre, haya error o no
-            setUploading(false); // Desbloquea el formulario
-          }
-        }
-      );
+      setUploadProgress(100);
+      console.log('✅ Certificado guardado completamente');
+      alert('Certificado enviado correctamente 🚀');
+      handleReset();
 
     } catch (error) {
-      // Captura errores generales (no relacionados con la subida)
-      console.error("Error general:", error);
-      alert("Hubo un error al procesar el archivo: " + error.message);
+      console.error("❌ Error al subir archivo:", error);
+      
+      // Mensajes de error más específicos
+      let errorMsg = "Error al subir el archivo: ";
+      if (error.message.includes('row-level security')) {
+        errorMsg += "Problema de permisos en Supabase. Verifica que la autenticación anónima esté habilitada y las políticas configuradas.";
+      } else if (error.message.includes('JWT')) {
+        errorMsg += "Problema de autenticación. Intenta recargar la página.";
+      } else {
+        errorMsg += error.message;
+      }
+      
+      alert(errorMsg);
+      setSupabaseAuth(false); // Forzar re-autenticación en el próximo intento
+      
+    } finally {
       setUploading(false);
-      setUploadProgress(0);
+      setTimeout(() => setUploadProgress(0), 1000);
     }
   };
 
-  // Limpia todos los campos del formulario
   const handleReset = () => {
     setNombre('');
     setApellido('');
     setNota('');
     setArchivo(null);
     setUploadProgress(0);
-    // Limpia también el input file del DOM
     const fileInput = document.getElementById('archivoInput');
     if (fileInput) fileInput.value = '';
   };
 
-  // Maneja la selección de archivo
   const handleFileChange = (e) => {
-    const file = e.target.files?.[0]; // ?. = optional chaining (evita error si es undefined)
+    const file = e.target.files?.[0];
     if (file) {
-      setArchivo(file); // Guarda el archivo en el estado
+      console.log('📁 Archivo seleccionado:', file.name, `(${(file.size / 1024).toFixed(2)} KB)`);
+      setArchivo(file);
     } else {
-      setArchivo(null); // Si se cancela la selección
+      setArchivo(null);
     }
   };
 
-  // RENDERIZADO CONDICIONAL 1: Mientras Firebase Auth se inicializa
   if (cargando) {
     return (
       <div className="certificado-container">
-        <p>Cargando...</p>
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Cargando...</p>
+        </div>
       </div>
     );
   }
 
-  // RENDERIZADO CONDICIONAL 2: Si no hay usuario autenticado
   if (!usuario) {
     return (
       <div className="certificado-container">
-        <p>Debes iniciar sesión para enviar certificados</p>
+        <div className="auth-required">
+          <h2>🔒 Acceso Restringido</h2>
+          <p>Debes iniciar sesión para enviar certificados</p>
+        </div>
       </div>
     );
   }
 
-  // RENDERIZADO PRINCIPAL: Usuario autenticado, muestra el formulario
   return (
     <div className="certificado-container">
       <form className="certificado-form" onSubmit={handleSubmit}>
@@ -214,10 +234,16 @@ export default function CertificadoForm() {
           <div className="form-left">
             <div className="form-group">
               <h1>Envío de certificados</h1>
-              {/* Muestra el email del usuario actual */}
-              <p style={{ fontSize: '0.9em', color: '#666' }}>
-                Usuario: {usuario.email}
-              </p>
+              <div className="user-info">
+                <p style={{ fontSize: '0.9em', color: '#666' }}>
+                  👤 Usuario: {usuario.email}
+                </p>
+                {supabaseAuth && (
+                  <p style={{ fontSize: '0.8em', color: '#28a745' }}>
+                    ✅ Conectado a Supabase
+                  </p>
+                )}
+              </div>
               <label>Ingrese su/s nombre/s *</label>
               <input
                 type="text"
@@ -225,7 +251,7 @@ export default function CertificadoForm() {
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 required
-                disabled={uploading} // Deshabilitado mientras sube el archivo
+                disabled={uploading}
               />
             </div>
 
@@ -260,51 +286,58 @@ export default function CertificadoForm() {
                 type="file"
                 id="archivoInput"
                 onChange={handleFileChange}
-                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" // Solo acepta estos tipos
+                accept=".pdf,.jpg,.jpeg,.png"
                 disabled={uploading}
               />
               <i className="icono-subida">📁⬆️</i>
-              {/* Muestra info del archivo si hay uno seleccionado */}
-              {archivo && (
-                <div>
-                  <p>Archivo seleccionado: {archivo.name}</p>
-                  <p>Tamaño: {(archivo.size / 1024).toFixed(2)} KB</p>
+              {archivo ? (
+                <div className="archivo-info">
+                  <p><strong>📄 {archivo.name}</strong></p>
+                  <p>📦 Tamaño: {(archivo.size / 1024).toFixed(2)} KB</p>
+                  <p>📋 Tipo: {archivo.type}</p>
                 </div>
+              ) : (
+                <p className="archivo-placeholder">
+                  Arrastra un archivo aquí o haz clic para seleccionar
+                </p>
               )}
             </div>
 
-            {/* Barra de progreso: solo se muestra mientras sube */}
             {uploading && (
               <div className="upload-progress">
                 <div className="progress-bar">
                   <div 
                     className="progress-fill" 
-                    style={{ width: `${uploadProgress}%` }} // Ancho dinámico según %
+                    style={{ width: `${uploadProgress}%` }}
                   ></div>
                 </div>
-                <p>Subiendo: {uploadProgress}%</p>
+                <p>
+                  {uploadProgress < 30 && '🔐 Autenticando...'}
+                  {uploadProgress >= 30 && uploadProgress < 70 && '📤 Subiendo archivo...'}
+                  {uploadProgress >= 70 && uploadProgress < 90 && '💾 Guardando datos...'}
+                  {uploadProgress >= 90 && '✅ Finalizando...'}
+                  {' '}({uploadProgress}%)
+                </p>
               </div>
             )}
           </div>
         </div>
 
         <div className="button-container">
-          {/* Botón para limpiar el formulario */}
           <button 
             type="button" 
             className="btn btn-reset" 
             onClick={handleReset}
-            disabled={uploading} // No se puede limpiar mientras sube
+            disabled={uploading}
           >
-            ELIMINAR
+            {uploading ? '⏳ ESPERE...' : '🗑️ ELIMINAR'}
           </button>
-          {/* Botón para enviar el formulario */}
           <button 
             type="submit" 
             className="btn btn-submit"
-            disabled={uploading} // No se puede enviar mientras ya está subiendo
+            disabled={uploading}
           >
-            {uploading ? 'ENVIANDO...' : 'ENVIAR'} {/* Texto dinámico */}
+            {uploading ? '⏳ ENVIANDO...' : '📤 ENVIAR'}
           </button>
         </div>
       </form>
