@@ -3,6 +3,7 @@ import {Routes, Route, Navigate} from 'react-router-dom';
 import { useAuth } from '../context/AuthContex';
 import Tabla from './tabla';
 import CertificadoForm from './FormularioCertificados';
+import FirestoreTable from './FirestoreTable'
 const RouterApp = () => {
     const { userData } = useAuth();
     const rol = userData?.cargo;

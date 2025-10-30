@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import { AuthProvider } from './context/AuthContex';
 import ProtectedRoutes from './componentes/protectedRoute';
 import PublicRoute from './componentes/publicRoute';
+import FirestoreTable from './componentes/FirestoreTable';
 
 import RouterApp from './componentes/routerApp';
 
@@ -33,6 +34,12 @@ function Layout() {
               <Formingresar />
             </PublicRoute>
             } />
+          
+          <Route path="/admin" element={
+            <PublicRoute>
+              <FirestoreTable />
+            </PublicRoute>
+            } />
 
           <Route 
             path='/*'
@@ -55,6 +62,21 @@ function App() {
     </Router>
   );
 }
+
+
+function Table() {
+  return (
+    <div className="Table">
+      <header>
+        <h1>Mi Aplicación con Datos de Firebase</h1>
+      </header>
+      {"/componentes/FirestoreTable.jsx"}
+      <FirestoreTable />
+    </div>
+  );
+}
+
+
 
 export default App;
 
