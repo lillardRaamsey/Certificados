@@ -102,7 +102,7 @@ export const supabaseFileService = {
 
       const {
         userId,
-        bucketName = 'certificar',
+        bucketName = 'certific-ar',
         folder = '',
         customFileName = null
       } = options;
@@ -153,7 +153,7 @@ export const supabaseFileService = {
   },
 
   // Eliminar archivo
-  async deleteFile(filePath, bucketName = 'certificar') {
+  async deleteFile(filePath, bucketName = 'certific-ar') {
     try {
       await ensureAuthenticated();
 
@@ -181,7 +181,7 @@ export const supabaseFileService = {
   },
 
   // Listar archivos
-  async listFiles(folder = '', bucketName = 'certificar') {
+  async listFiles(folder = '', bucketName = 'certific-ar') {
     try {
       await ensureAuthenticated();
 
