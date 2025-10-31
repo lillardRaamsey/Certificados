@@ -30,19 +30,6 @@ export default function CertificadoForm() {
       setCargando(false);
       console.log('Usuario Firebase autenticado:', user?.uid);
       console.log('Email:', user?.email);
-
-      // Si hay usuario de Firebase, autenticar en Supabase automáticamente
-      if (user) {
-        try {
-          console.log('🔐 Iniciando autenticación en Supabase...');
-          await authenticateSupabase();
-          setSupabaseAuth(true);
-          console.log('✅ Autenticado en Supabase correctamente');
-        } catch (error) {
-          console.error('❌ Error al autenticar en Supabase:', error);
-          setSupabaseAuth(false);
-        }
-      }
     });
 
     return () => unsubscribe();
@@ -79,7 +66,7 @@ export default function CertificadoForm() {
 
       try {
         await addCertificado(datosFormulario);
-        alert('Formulario enviado correctamente 🚀');
+        alert('Formulario enviado correctamente');
         handleReset();
       } catch (error) {
         console.error("Error al enviar:", error);
@@ -113,18 +100,18 @@ export default function CertificadoForm() {
     setUploadProgress(10); // Inicio
     
     try {
-      console.log('📤 Iniciando proceso de subida...');
+      console.log('Iniciando proceso de subida...');
       
       // PASO 1: Asegurar autenticación en Supabase
       if (!supabaseAuth) {
-        console.log('🔐 Re-autenticando en Supabase...');
+        console.log('Re-autenticando en Supabase...');
         await authenticateSupabase();
         setSupabaseAuth(true);
       }
       setUploadProgress(20);
 
       // PASO 2: Subir archivo usando el servicio
-      console.log('📤 Subiendo archivo a Supabase...');
+      console.log('Subiendo archivo a Supabase...');
       const resultado = await supabaseFileService.uploadFile(archivo, {
         folder: usuario.uid, // Organizar por usuario
         bucketName: 'certific-ar'
@@ -134,7 +121,7 @@ export default function CertificadoForm() {
         throw new Error(resultado.error || 'Error al subir archivo');
       }
 
-      console.log('✅ Archivo subido exitosamente:', resultado.url);
+      console.log('Archivo subido exitosamente:', resultado.url);
       setUploadProgress(70);
 
       // PASO 3: Preparar datos para Firestore
@@ -152,19 +139,19 @@ export default function CertificadoForm() {
         creado: new Date()
       };
 
-      console.log('💾 Guardando metadata en Firestore...');
+      console.log('Guardando metadata en Firestore...');
       setUploadProgress(85);
 
       // PASO 4: Guardar en Firestore
       await addCertificado(datosFormulario);
       
       setUploadProgress(100);
-      console.log('✅ Certificado guardado completamente');
+      console.log('Certificado guardado completamente');
       alert('Certificado enviado correctamente 🚀');
       handleReset();
 
     } catch (error) {
-      console.error("❌ Error al subir archivo:", error);
+      console.error("Error al subir archivo:", error);
       
       // Mensajes de error más específicos
       let errorMsg = "Error al subir el archivo: ";
@@ -198,7 +185,7 @@ export default function CertificadoForm() {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log('📁 Archivo seleccionado:', file.name, `(${(file.size / 1024).toFixed(2)} KB)`);
+      console.log('Archivo seleccionado:', file.name, `(${(file.size / 1024).toFixed(2)} KB)`);
       setArchivo(file);
     } else {
       setArchivo(null);
@@ -220,7 +207,7 @@ export default function CertificadoForm() {
     return (
       <div className="certificado-container">
         <div className="auth-required">
-          <h2>🔒 Acceso Restringido</h2>
+          <h2>Acceso Restringido</h2>
           <p>Debes iniciar sesión para enviar certificados</p>
         </div>
       </div>
@@ -238,11 +225,6 @@ export default function CertificadoForm() {
                 <p style={{ fontSize: '0.9em', color: '#666' }}>
                   👤 Usuario: {usuario.email}
                 </p>
-                {supabaseAuth && (
-                  <p style={{ fontSize: '0.8em', color: '#28a745' }}>
-                    ✅ Conectado a Supabase
-                  </p>
-                )}
               </div>
               <label>Ingrese su/s nombre/s *</label>
               <input
@@ -292,9 +274,9 @@ export default function CertificadoForm() {
               <i className="icono-subida">📁⬆️</i>
               {archivo ? (
                 <div className="archivo-info">
-                  <p><strong>📄 {archivo.name}</strong></p>
-                  <p>📦 Tamaño: {(archivo.size / 1024).toFixed(2)} KB</p>
-                  <p>📋 Tipo: {archivo.type}</p>
+                  <p><strong>{archivo.name}</strong></p>
+                  <p>Tamaño: {(archivo.size / 1024).toFixed(2)} KB</p>
+                  <p>Tipo: {archivo.type}</p>
                 </div>
               ) : (
                 <p className="archivo-placeholder">
@@ -312,10 +294,10 @@ export default function CertificadoForm() {
                   ></div>
                 </div>
                 <p>
-                  {uploadProgress < 30 && '🔐 Autenticando...'}
-                  {uploadProgress >= 30 && uploadProgress < 70 && '📤 Subiendo archivo...'}
-                  {uploadProgress >= 70 && uploadProgress < 90 && '💾 Guardando datos...'}
-                  {uploadProgress >= 90 && '✅ Finalizando...'}
+                  {uploadProgress < 30 && 'Autenticando...'}
+                  {uploadProgress >= 30 && uploadProgress < 70 && 'Subiendo archivo...'}
+                  {uploadProgress >= 70 && uploadProgress < 90 && 'Guardando datos...'}
+                  {uploadProgress >= 90 && 'Finalizando...'}
                   {' '}({uploadProgress}%)
                 </p>
               </div>
@@ -330,14 +312,14 @@ export default function CertificadoForm() {
             onClick={handleReset}
             disabled={uploading}
           >
-            {uploading ? '⏳ ESPERE...' : '🗑️ ELIMINAR'}
+            {uploading ? 'ESPERE...' : 'ELIMINAR'}
           </button>
           <button 
             type="submit" 
             className="btn btn-submit"
             disabled={uploading}
           >
-            {uploading ? '⏳ ENVIANDO...' : '📤 ENVIAR'}
+            {uploading ? 'ENVIANDO...' : 'ENVIAR'}
           </button>
         </div>
       </form>

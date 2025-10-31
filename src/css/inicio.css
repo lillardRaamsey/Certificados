@@ -42,14 +42,13 @@
   position: absolute;
   top: 43%;
   border: none;
-  font-size: 3rem;
+  font-size: 5rem;
   cursor: pointer;
   z-index: 9;
   border-radius: 50%;
   transition: background 0.3s;
   padding: 5px;
   border-radius: 60px;
-  background: rgba(156, 156, 156, 0.7);
   text-align: center;
   height: 50px;
   
@@ -57,14 +56,22 @@
 
 .arrow.left {
   left: 20px;
-  width: 50px;
   color: aliceblue;
+  margin-left: 147px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
 }
 
 .arrow.right {
   right: 20px; 
   width: 50px;
   color: aliceblue;
+  margin-right: 147px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 .arrow:hover{
