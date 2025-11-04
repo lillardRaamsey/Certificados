@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <div className="navbar">
       <img src={logo} alt="Logo EPET N°20" />
-      <Link to="/">Inicio</Link>
+      <Link className='navText' to="/">Inicio</Link>
       
     </div>
   );

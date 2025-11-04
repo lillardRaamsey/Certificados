@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../Firebase/firebaseConfig.jsx';
+import "../css/firestoreTable.css"
 
 
 function FirestoreTable() {
@@ -44,16 +45,16 @@ function FirestoreTable() {
   }, []);
 
   if (loading) {
-    return <div style={{ padding: '20px', textAlign: 'center' }}>Cargando datos de Firebase...</div>;
+    return <div classname="cargando">Cargando datos de Firebase...</div>;
   }
 
   if (error) {
-    return <div style={{ color: 'red', padding: '20px', textAlign: 'center' }}>Error: {error}</div>;
+    return <div classname="error">Error: {error}</div>;
   }
 
 
   if (data.length === 0) {
-    return <div style={{ padding: '20px', textAlign: 'center' }}>No se encontraron documentos en la colección **'{collectionName}'**.</div>;
+    return <div classname="no-colecciones">No se encontraron documentos en la colección **'{collectionName}'**.</div>;
   }
 
 
@@ -61,32 +62,31 @@ function FirestoreTable() {
 
 
   return (
-    <div style={{ margin: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div className="container-table">
       <h2>Datos de la Colección "{collectionName}" (Firebase Firestore)</h2>
-      <table style={styles.table}>
+      <table>
         <thead>
-          <tr>
 
-            {dynamicColumns.map((col, index) => (
-              <th key={index} style={styles.th}>{col}</th>
+          <tr>
+            {dynamicColumns.map
+            ((col, index) => (
+              <th key={index}>
+                {col}
+              </th>
             ))}
           </tr>
+
         </thead>
         <tbody>
 
           {data.map((item) => (
             <tr>
-              <td style={styles.td}>
+              <td>
                 {item.archivoURL ? (
                   <a
                     href={item.archivoURL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      color: '#0066cc',
-                      textDecoration: 'underline',
-                      cursor: 'pointer'
-                    }}
                   >
                     Abrir certificado
                   </a>
@@ -94,49 +94,29 @@ function FirestoreTable() {
                   'N/A'
                 )}
               </td>
-              <td style={styles.td}>
+
+              <td>
                 {item.creado && typeof item.creado.toDate === 'function'
                   ? item.creado.toDate().toLocaleString()
                   : item.creado || 'N/A'
                 }
               </td>
-              <td style={styles.td}>{item.userEmail}</td>
+
+              <td>
+                {item.userEmail}
+              </td>
 
 
             </tr>
           ))}
         </tbody>
       </table>
-      <p style={styles.footer}>Total de documentos recuperados: **{data.length}**</p>
+      <p classname="footer">Total de documentos recuperados: **{data.length}**</p>
     </div>
   );
 }
 
 
-const styles = {
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    marginTop: '15px',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-  },
-  th: {
-    border: '1px solid #ddd',
-    padding: '12px',
-    textAlign: 'left',
-    backgroundColor: '#f2f2f2',
-    color: '#333',
-  },
-  td: {
-    border: '1px solid #ddd',
-    padding: '12px',
-    textAlign: 'left',
-  },
-  footer: {
-    marginTop: '15px',
-    fontSize: '0.9em',
-    color: '#666'
-  }
-};
+
 
 export default FirestoreTable;

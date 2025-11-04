@@ -1,7 +1,6 @@
 import React from "react";
 import {Routes, Route, Navigate} from 'react-router-dom';
 import { useAuth } from '../context/AuthContex';
-import Tabla from './tabla';
 import CertificadoForm from './FormularioCertificados';
 import FirestoreTable from './FirestoreTable'
 const RouterApp = () => {
@@ -12,8 +11,8 @@ const RouterApp = () => {
         <Routes>
             <Route path="/envioCertificado" element={<CertificadoForm />} />
             <Route 
-            path="/tabla"
-            element={rol === "admin" ? <Tabla/>: <Navigate to="/" />}
+            path="./FirestoreTable"
+            element={rol === "admin" ? <FirestoreTable/>: <Navigate to="/" />}
             />
         </Routes>
     )

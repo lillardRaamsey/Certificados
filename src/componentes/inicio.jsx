@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../css/inicio.css";
 import { useAuth } from "../context/AuthContex";
 import { Link } from "react-router-dom";
-import foto1 from "../img/certificar2.png";
-import foto2 from "../img/Certificartexto.jpg"; //imágenes de carrousel
-import foto3 from "../img/epet20.png";
+import foto1 from "../img/epet20.png";
+import foto2 from "../img/certificar2.png"; //imágenes de carrousel
+import foto3 from "../img/Certificartexto.jpg";
 
 export default function Inicio() {
   const [index, setIndex] = useState(0);
