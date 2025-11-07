@@ -77,16 +77,7 @@ const handleGoogleSignIn = async () => {
           <h1>{titulo}</h1>
           
           {errorMostrado && (
-            <div style={{ 
-              color: '#ff4444', 
-              padding: '12px', 
-              border: '2px solid #ff4444', 
-              borderRadius: '8px',
-              marginBottom: '20px',
-              backgroundColor: 'rgba(255, 68, 68, 0.1)',
-              fontWeight: 'bold',
-              textAlign: 'center'
-            }}>
+            <div className="error">
               ⚠️ {errorMostrado}
             </div>
           )}
@@ -128,7 +119,7 @@ const handleGoogleSignIn = async () => {
                 minLength={6}
                 disabled={loading}
               />
-              <small style={{ color: '#888', fontSize: '12px', display: 'block', marginTop: '5px' }}>
+              <small>
                 Mínimo 6 caracteres
               </small>
             </div>
@@ -174,14 +165,15 @@ const handleGoogleSignIn = async () => {
 
 
           <button 
-  type="button"
-  className="google-btn"
-  onClick={handleGoogleSignIn}
-  disabled={loading}
->
-  <FaGoogle className="google-logo-color" />
-  Iniciar sesión con Google
-</button>
+              type="button"
+              className="google-btn"
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+          >
+          <FaGoogle className="google-logo-color" />
+              Iniciar sesión con Google
+          </button>
+
           <div>
             <h3>
               ¿Ya Tienes una Cuenta? <Link to="/ingresar">Inicia Sesión</Link>

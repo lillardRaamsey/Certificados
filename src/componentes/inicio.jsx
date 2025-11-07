@@ -40,7 +40,14 @@ export default function Inicio() {
         <><Link to="/envioCertificado"><div className="button">Certificados</div></Link></>
          ) : (
         <><Link to="/ingresar"> <div className="button">Ingresar</div></Link>
-          <div classname="registrarte"><Link to="/registro">¿No tenés una cuenta? Registrate</Link></div></>
+        
+          <div classname="registrarte">
+          <h3> 
+            ¿No tenés una cuenta?
+            <Link to="/registro"> Registrate</Link>
+          </h3>
+          
+          </div></>
          )
         }
       </div>

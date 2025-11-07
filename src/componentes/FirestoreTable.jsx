@@ -62,8 +62,11 @@ function FirestoreTable() {
 
 
   return (
-    <div className="container-table">
+    <div className='container-content'>
+    <div className="container-header">
       <h2>Datos de la Colección "{collectionName}" (Firebase Firestore)</h2>
+    </div>
+    <div className="container-table">
       <table>
         <thead>
 
@@ -111,12 +114,10 @@ function FirestoreTable() {
           ))}
         </tbody>
       </table>
-      <p classname="footer">Total de documentos recuperados: **{data.length}**</p>
+    </div>
+      <p classname="footer">Total de documentos recuperados: **{data.length}**</p> 
     </div>
   );
-}
-
-
-
+} 
 
 export default FirestoreTable;

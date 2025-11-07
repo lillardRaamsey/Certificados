@@ -19,6 +19,24 @@
     color: #172843;
 }
 
+.error{
+    color: #ff4444; 
+    padding: 12px;
+    border: 2px solid #ff4444;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 68, 68, 0.1);
+    font-weight: bold;
+    text-align: center;
+}
+
+small{
+    color: #888;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
 h1 {
     text-align: center;
     margin-bottom:10px;
@@ -36,14 +54,14 @@ h3 {
 }
 
 h3 a {
-    color: #FFD700;
+    color: #FFA500;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 h3 a:hover {
-    color: #FFA500;
+    color: #d75f04 ;
     text-decoration: underline;
 }
 
