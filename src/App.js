@@ -1,5 +1,5 @@
 import Navbar from './componentes/nav';
-
+ 
 import './App.css';
 import FormRegistro from './componentes/formRegistro';
 import Formingresar from './componentes/formingresar';
@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContex';
 import ProtectedRoutes from './componentes/protectedRoute';
 import PublicRoute from './componentes/publicRoute';
 import FirestoreTable from './componentes/FirestoreTable';
+import FirestoreTableroles from './componentes/FirestoreTableroles';
 
 import RouterApp from './componentes/routerApp';
 
@@ -38,6 +39,12 @@ function Layout() {
           <Route path="/admin" element={
             <PublicRoute>
               <FirestoreTable />
+            </PublicRoute>
+            } />
+
+          <Route path="/dir" element={
+            <PublicRoute>
+              <FirestoreTableroles />
             </PublicRoute>
             } />
 

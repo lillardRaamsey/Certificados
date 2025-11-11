@@ -7,9 +7,6 @@ import foto2 from "../img/certificar2.png"; //imágenes de carrousel
 import foto3 from "../img/Certificartexto.jpg";
 
 export default function Inicio() {
-  const {user, userData } = useAuth();
-  const rol = userData?.cargo;
-
   const [index, setIndex] = useState(0);
   const images = [foto1, foto2, foto3];
 
@@ -22,6 +19,7 @@ export default function Inicio() {
     setIndex((prev) => (prev + 1) % images.length);
   };
 
+  const {user}= useAuth();
 
   return (
     <div className="inicio-container">
@@ -39,8 +37,7 @@ export default function Inicio() {
          <div className="arrow left" onClick={prevSlide}>❮</div>
          <div className="arrow right" onClick={nextSlide}>❯</div>
         {user ? (
-        <><Link to="/envioCertificado"><div className="button">Certificados</div></Link>
-        {rol === "admin" && (<Link to="/admin"><div className="button">ver tabla</div></Link>)}</>
+        <><Link to="/envioCertificado"><div className="button">Certificados</div></Link></>
          ) : (
         <><Link to="/ingresar"> <div className="button">Ingresar</div></Link>
         

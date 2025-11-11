@@ -8,66 +8,9 @@
     background-color: #233a5e;
     gap:20px;
     width: 100%;
-    justify-content: space-between;
 }
 .navbar img {
     height: 90px;
     margin-right: 50px;
     margin-left: 40px;
-}
-
-.navText{
-  margin-right: 60%;
-}
-
-.usuario {
-  position: relative;
-}
-
-.usuario img {
-  height: 70px;
-  width: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.usuario img:hover {
-  transform: scale(1.05);
-}
-
-.infoyce {
-  position: absolute;
-  top: 80px;
-  right: 0;
-  border-radius: 8px;
-  padding: 8px;
-  animation: fadeIn 0.2s ease;
-  z-index: 10;
-}
-
-.btn-cerrar {
-  background-color: #d9534f;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn-cerrar:hover {
-  background-color: #c9302c;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
