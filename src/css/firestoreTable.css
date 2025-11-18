@@ -45,18 +45,6 @@ h2{
     transform: scale(1.1);
 }
 
-p {
-    align-content: center;
-    text-align: center;
-    margin-top: 15px;
-    font-size: 0.9em;
-    color: #333;
-    background:rgba(240, 248, 255, 0.49);
-    padding: 5px;
-    margin-left: 500px;
-    margin-right: 500px;
-  }
-
 table {
     width: 1000px;
     border-collapse: collapse;
@@ -79,3 +67,10 @@ table {
     text-align: center;
   }
 
+  footer {
+    align-content: center;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #666;
+  }
