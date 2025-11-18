@@ -11,7 +11,7 @@ const RouterApp = () => {
         <Routes>
             <Route path="/envioCertificado" element={<CertificadoForm />} />
             <Route 
-            path="./FirestoreTable"
+            path="/FirestoreTable"
             element={rol === "admin" ? <FirestoreTable/>: <Navigate to="/" />}
             />
         </Routes>

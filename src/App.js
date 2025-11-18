@@ -37,15 +37,15 @@ function Layout() {
             } />
           
           <Route path="/admin" element={
-            <PublicRoute>
+            <ProtectedRoutes roles={["admin"]}>
               <FirestoreTable />
-            </PublicRoute>
+            </ProtectedRoutes>
             } />
 
           <Route path="/dir" element={
-            <PublicRoute>
+            <ProtectedRoutes roles={["admin"]}>
               <FirestoreTableroles />
-            </PublicRoute>
+            </ProtectedRoutes>
             } />
 
           <Route 
