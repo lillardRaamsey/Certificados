@@ -6,6 +6,8 @@ const PublicRoute = ({ children }) => {
     
     if (loading) return <p>cargando....</p>
 
+    if (user) return <Navigate to="/" replace/>
+
     return children;
 };
 export default PublicRoute;
