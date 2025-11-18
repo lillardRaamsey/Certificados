@@ -10,7 +10,7 @@ function FirestoreTable() {
     const [error, setError] = useState(null);
 
     const collectionName = "usuarios";
-    const columns = ['email', 'cargo', 'nombre', 'Acciones'];
+    const columns = ['E-Mail', 'Cargo', 'Nombre', 'Acciones'];
 
 
     const handleCargoChange = async (userId, newCargo) => {
@@ -91,7 +91,9 @@ function FirestoreTable() {
     return (
         <div className='container-content'>
             <div className="container-header">
-                <h2>Datos de la Colección "{collectionName}" (Firebase Firestore)</h2>
+                <h2>
+                    Usuarios registrados
+                </h2>
             </div>
             <div className="container-table">
                 <table>
@@ -142,7 +144,7 @@ function FirestoreTable() {
                     </tbody>
                 </table>
             </div>
-            <p classname="footer">Total de documentos recuperados: **{data.length}**</p> 
+            <p><strong>Total de documentos recibidos: **{data.length}**</strong></p> 
         </div>
     );
 } 
