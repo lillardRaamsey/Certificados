@@ -144,7 +144,7 @@ function FirestoreTable() {
                     </tbody>
                 </table>
             </div>
-            <p><strong>Total de documentos recibidos: **{data.length}**</strong></p> 
+            <p><strong>Total de alumnos registrados: **{data.length}**</strong></p> 
         </div>
     );
 } 
