@@ -15,7 +15,7 @@ function FirestoreTable() {
 
 
   const collectionName = "certificados";
-  const columns = ['archivoURL', 'creado', 'userEmail', 'Acciones'];
+  const columns = ['Certificado', 'Creado', 'E-Mail', 'Acciones'];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,7 +123,7 @@ function FirestoreTable() {
   return (
     <div className='container-content'>
       <div className="container-header">
-        <h2>Datos de la Colección "{collectionName}" (Firebase Firestore)</h2>
+        <h2>Certificados recibidos</h2>
       </div>
       <div className="container-table">
         <table>
@@ -219,7 +219,7 @@ function FirestoreTable() {
           </tbody>
         </table>
       </div>
-      <p className="footer">Total de documentos recuperados: **{data.length}**</p> 
+      <p><strong>Total de documentos recuperados: **{data.length}**</strong></p> 
     </div>
   );
 } 
