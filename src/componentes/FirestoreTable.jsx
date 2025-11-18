@@ -15,9 +15,7 @@ function FirestoreTable() {
 
 
   const collectionName = "certificados";
-
-
-  const columns = ['Certificado', 'Creacion', 'Usuario'];
+  const columns = ['archivoURL', 'creado', 'userEmail', 'Acciones'];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,40 +122,45 @@ function FirestoreTable() {
 
   return (
     <div className='container-content'>
-    <div className="container-header">
-      <h2>Certificados recibidos</h2>
-    </div>
-    <div className="container-table">
-      <table>
-        <thead>
-
-          <tr>
-            {dynamicColumns.map
-            ((col, index) => (
-              <th key={index}>
-                {col}
-              </th>
-            ))}
-          </tr>
-
-        </thead>
-        <tbody>
-
-          {data.map((item) => (
+      <div className="container-header">
+        <h2>Datos de la Colección "{collectionName}" (Firebase Firestore)</h2>
+      </div>
+      <div className="container-table">
+        <table>
+          <thead>
             <tr>
-              <td>
-                {item.archivoURL ? (
-                  <a
-                    href={item.archivoURL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Abrir certificado
-                  </a>
-                ) : (
-                  'N/A'
-                )}
-              </td>
+              {dynamicColumns.map((col, index) => (
+                <th key={index}>
+                  {col === 'archivoURL' ? 'Archivo (URL)' : col}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item) => (
+              <tr key={item.id}>
+
+                <td>
+                  {editingId === item.id ? (
+                    <input
+                      type="text"
+                      name="archivoURL"
+                      value={editFormData.archivoURL}
+                      onChange={handleEditFormChange}
+                      placeholder="URL del archivo"
+                    />
+                  ) : item.archivoURL ? (
+                    <a
+                      href={item.archivoURL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Abrir certificado
+                    </a>
+                  ) : (
+                    'N/A'
+                  )}
+                </td>
 
                 <td>
 
@@ -211,12 +214,12 @@ function FirestoreTable() {
                   )}
                 </td>
 
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-      <p><strong>Total de documentos recibidos: **{data.length}**</strong></p> 
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="footer">Total de documentos recuperados: **{data.length}**</p> 
     </div>
   );
 } 
