@@ -125,3 +125,13 @@ a:hover {
 h3{
   color: white;
 }
+
+.botones{
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.botones .button{
+  width: 200px;
+}
